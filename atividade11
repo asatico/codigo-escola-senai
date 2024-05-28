@@ -2,53 +2,31 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <locale.h>
-struct estudadantes_t{
-	double scores[4];
-	double total;
-};
-
-
-void registrar_aluno(estudadantes_t *est){	
-	char aluno[10];
-	for (int contador = 0; contador < 5; contador++){  
-	    printf("Digite o nome do aluno:\n");
-	    scanf("%s", aluno);
-		printf("Digite as notas do %c aluno (de 0 ate 10): \n", aluno);
-		scanf("%lf", &(est->scores)[0]);
-	    scanf("%lf", &(est->scores)[1]);
-	    scanf("%lf", &(est->scores)[2]);
-	    scanf("%lf", &(est->scores)[3]);
-	    
-	    float nota = (est->scores[0]+ est->scores[1] + est->scores[2] + est->scores[3]);
-       float media = (nota /4);	
-       
-       printf("A nota geral dos alunos sao:\n",est->scores[0] + est->scores[1] +  est->scores[2] …
-[14:43, 5/27/2024] Guilherme: #include <stdio.h>
-#include <stdlib.h>
-#include <Windows.h>
-#include <locale.h>
 struct estudantes_t{
 	double scores[4];
 	double total;
 };
 
 
-void registrar_aluno(estudantes_t *est){	
+void registrar_aluno(estudantes_t *est){
+	       	
 	char aluno[10];
-	for (int contador = 0; contador < 5; contador++){  
+	  
 	    printf("Digite o nome do aluno:\n");
 	    scanf("%s", aluno);
-		printf("Digite as notas do %c aluno (de 0 ate 10): \n", aluno);
+		printf("Digite a nota do aluno  %s  (de 0 ate 10): \n", aluno);
 		scanf("%lf", &(est->scores)[0]);
 	    scanf("%lf", &(est->scores)[1]);
 	    scanf("%lf", &(est->scores)[2]);
 	    scanf("%lf", &(est->scores)[3]);
-	    
-	   float nota = (est->scores[0]+ est->scores[1] + est->scores[2] + est->scores[3]);
-       float media = (nota /4);	
+  
+	    float nota = (est->scores[0]+ est->scores[1] + est->scores[2] + est->scores[3]);
+       float media = (nota /4);
+       est->total = media;
        
-       printf("A nota geral dos alunos sao:\n %lf",est->scores[0] + est->scores[1] +  est->scores[2] + est->scores[3]);
-    }
+       
+       printf("A nota geral do aluno é:\n %f %f",nota, media);
+      
 }
 void editar_estudantes(estudantes_t *est, int _s){
  if (!_s){
@@ -74,27 +52,25 @@ void lista_estudante(estudantes_t *estudante, int _s){
      return; 
   } 
   for (int i = 0; i < _s; i++){
-      double media = estudante[i].total / 4;
-      printf("Aluno (%d) - notas: %.2lf %.2lf %.2lf %.2lf - total: %.2lf - media: %.2lf", i + 1, estudante[i].scores[0], estudante[i].scores[1], estudante[i].scores[2], estudante[i].scores[3], estudante[i].total, media);
+      double media = estudante[i].total;
+      printf("\nAluno (%d) - notas: %.2lf %.2lf %.2lf %.2lf - total: %.2lf - media: %.2lf \n", (i + 1), estudante[i].scores[0], estudante[i].scores[1], estudante[i].scores[2], estudante[i].scores[3], estudante[i].total, media);
       
      if (media < 4) {
 	   printf("ALUNO REPROVADO \n");
-	 }else if (media < 6 && media > 4) {
-	        printf("ALUNOS APROVADO \n");
+	 }else if (media > 4 && media < 6) {
+	        printf("ALUNO DE RECUPERACAO \n");
 	   }else {
-	   	printf("ALUNO DE RECUPERAÇÃO \n");
+	   	printf("ALUNO APROVADO \n");
 	 }
   }
 }
 int main() {
 	setlocale(LC_ALL,"");
 	estudantes_t aluno[5];
-	float nota1,nota2,nota3,nota4;
-	char matricula;
-	int opcao=0;
+	int opcao=0, _s;
 	
 	printf("Caregando sistema.....aguarde");
-	sleep(1000);
+	sleep(1);
 	
 	while ((opcao != 1) &&(opcao != 2 )&&(opcao != 3)){
 		system("cls");
@@ -107,11 +83,19 @@ int main() {
 		scanf("%d",&opcao);
 		if (opcao == 1){
 	     	system("cls");
-	     	registrar_aluno(aluno);
+			if (_s == 5){
+				printf("Limeite maximo atingido!\n");
+			}  else { 
+				registrar_aluno(&aluno[_s]);
+				_s++;
+				lista_estudante(aluno, _s);			  
+			}
+	     	system("pause");
+	     	opcao = 0;
 	    } else {
 	    	if (opcao == 2){
 	        	system("cls");
-	        	lista_estudante(media);
+	        	editar_estudantes(aluno, _s);
 			} else {
 				if (opcao == 3){
 					exit;
