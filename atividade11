@@ -1,0 +1,123 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <locale.h>
+struct estudadantes_t{
+	double scores[4];
+	double total;
+};
+
+
+void registrar_aluno(estudadantes_t *est){	
+	char aluno[10];
+	for (int contador = 0; contador < 5; contador++){  
+	    printf("Digite o nome do aluno:\n");
+	    scanf("%s", aluno);
+		printf("Digite as notas do %c aluno (de 0 ate 10): \n", aluno);
+		scanf("%lf", &(est->scores)[0]);
+	    scanf("%lf", &(est->scores)[1]);
+	    scanf("%lf", &(est->scores)[2]);
+	    scanf("%lf", &(est->scores)[3]);
+	    
+	    float nota = (est->scores[0]+ est->scores[1] + est->scores[2] + est->scores[3]);
+       float media = (nota /4);	
+       
+       printf("A nota geral dos alunos sao:\n",est->scores[0] + est->scores[1] +  est->scores[2] …
+[14:43, 5/27/2024] Guilherme: #include <stdio.h>
+#include <stdlib.h>
+#include <Windows.h>
+#include <locale.h>
+struct estudantes_t{
+	double scores[4];
+	double total;
+};
+
+
+void registrar_aluno(estudantes_t *est){	
+	char aluno[10];
+	for (int contador = 0; contador < 5; contador++){  
+	    printf("Digite o nome do aluno:\n");
+	    scanf("%s", aluno);
+		printf("Digite as notas do %c aluno (de 0 ate 10): \n", aluno);
+		scanf("%lf", &(est->scores)[0]);
+	    scanf("%lf", &(est->scores)[1]);
+	    scanf("%lf", &(est->scores)[2]);
+	    scanf("%lf", &(est->scores)[3]);
+	    
+	   float nota = (est->scores[0]+ est->scores[1] + est->scores[2] + est->scores[3]);
+       float media = (nota /4);	
+       
+       printf("A nota geral dos alunos sao:\n %lf",est->scores[0] + est->scores[1] +  est->scores[2] + est->scores[3]);
+    }
+}
+void editar_estudantes(estudantes_t *est, int _s){
+ if (!_s){
+   printf("Não há estudantes cadastrados! \n");
+   return;
+  }
+  int i;
+
+ printf("Digite qual o estudante (1 - %d):", _s);
+ scanf("%d",&i);
+ 
+ i--;
+ 
+ if(i < 0 || i > _s - 1){
+     printf("Este estudante não esta cadastrado!\n");
+     return;
+ }
+  registrar_aluno(&est[i]);
+}
+void lista_estudante(estudantes_t *estudante, int _s){
+  if (!_s) {
+     printf ("Não há estudantes cadastrados!\n");
+     return; 
+  } 
+  for (int i = 0; i < _s; i++){
+      double media = estudante[i].total / 4;
+      printf("Aluno (%d) - notas: %.2lf %.2lf %.2lf %.2lf - total: %.2lf - media: %.2lf", i + 1, estudante[i].scores[0], estudante[i].scores[1], estudante[i].scores[2], estudante[i].scores[3], estudante[i].total, media);
+      
+     if (media < 4) {
+	   printf("ALUNO REPROVADO \n");
+	 }else if (media < 6 && media > 4) {
+	        printf("ALUNOS APROVADO \n");
+	   }else {
+	   	printf("ALUNO DE RECUPERAÇÃO \n");
+	 }
+  }
+}
+int main() {
+	setlocale(LC_ALL,"");
+	estudantes_t aluno[5];
+	float nota1,nota2,nota3,nota4;
+	char matricula;
+	int opcao=0;
+	
+	printf("Caregando sistema.....aguarde");
+	sleep(1000);
+	
+	while ((opcao != 1) &&(opcao != 2 )&&(opcao != 3)){
+		system("cls");
+		printf("\n SEJA BEM VINDO \n");
+		printf("\n ----- MENU ----- \n");
+		printf("1. Cadastrar Aluno \n");
+		printf("2. Editar Resultado \n");
+		printf("3. Sair \n");
+		printf("Escolha uma opção: ");	
+		scanf("%d",&opcao);
+		if (opcao == 1){
+	     	system("cls");
+	     	registrar_aluno(aluno);
+	    } else {
+	    	if (opcao == 2){
+	        	system("cls");
+	        	lista_estudante(media);
+			} else {
+				if (opcao == 3){
+					exit;
+				}
+			}
+		} 
+	}
+return 0;
+}
