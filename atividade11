@@ -19,15 +19,15 @@ void registrar_aluno(estudantes_t *est){
 	    scanf("%lf", &(est->scores)[1]);
 	    scanf("%lf", &(est->scores)[2]);
 	    scanf("%lf", &(est->scores)[3]);
-  
-	    float nota = (est->scores[0]+ est->scores[1] + est->scores[2] + est->scores[3]);
-       float media = (nota /4);
-       est->total = media;
+	
+			float nota = (est->scores[0]+ est->scores[1] + est->scores[2] + est->scores[3]);
+       		float media = (nota /4);
+       		est->total = media;
        
        
-       printf("A nota geral do aluno é:\n %f %f",nota, media);
-      
-}
+       	printf("A nota geral do aluno é:\n %f %f",nota, media);
+       
+    }
 void editar_estudantes(estudantes_t *est, int _s){
  if (!_s){
    printf("Não há estudantes cadastrados! \n");
@@ -69,8 +69,10 @@ int main() {
 	estudantes_t aluno[5];
 	int opcao=0, _s;
 	
+	system("color fc");
+	
 	printf("Caregando sistema.....aguarde");
-	sleep(1);
+	sleep(10);
 	
 	while ((opcao != 1) &&(opcao != 2 )&&(opcao != 3)){
 		system("cls");
@@ -96,12 +98,14 @@ int main() {
 	    	if (opcao == 2){
 	        	system("cls");
 	        	editar_estudantes(aluno, _s);
-			} else {
+	        	system("pause");
+	        	opcao=0;
+			}else {
 				if (opcao == 3){
-					exit;
+					return 0;
 				}
 			}
 		} 
 	}
-return 0;
+	return 0;
 }
